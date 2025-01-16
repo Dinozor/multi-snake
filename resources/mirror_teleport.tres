@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MirrorTeleport" load_steps=2 format=3 uid="uid://bpqtpbbtg23ei"]
+
+[ext_resource type="Script" uid="uid://6pg06625r6g3" path="res://core/objects/mirror_teleport.gd" id="1_l6aij"]
+
+[resource]
+script = ExtResource("1_l6aij")
+metadata/_custom_type_script = ExtResource("1_l6aij")

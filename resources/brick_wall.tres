@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Wall" load_steps=2 format=3 uid="uid://c5dj463fb8ftb"]
+
+[ext_resource type="Script" path="res://core/objects/wall.gd" id="1_h8ngh"]
+
+[resource]
+script = ExtResource("1_h8ngh")
+tileset_index = 0
+tile_coordinate = Vector2i(0, 0)
+metadata/_custom_type_script = ExtResource("1_h8ngh")
