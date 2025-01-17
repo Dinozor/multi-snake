@@ -5,7 +5,7 @@
 [resource]
 resource_name = "Cherry Resource"
 script = ExtResource("1_c1bvn")
-size_increase = 2
+size_increase = 1
 remove_on_collide = true
 tileset_index = 0
 tile_coordinate = Vector2i(2, 3)

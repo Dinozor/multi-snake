@@ -4,6 +4,7 @@ extends Node2D
 
 #signal level_won()
 #signal snake_wall_hit(snake: Snake)
+signal food_consumed()
 
 @export var snake_controller: Node
 @export var _map: Map
@@ -15,11 +16,15 @@ var _timer: float = 1 / _speed
 var _snake_free_spawn_locations: Array[Node2D]
 
 @onready var snake_spawn_locations: Node = %SnakeSpawnLocations
+@onready var food_spawner: ObjectSpawner = $FoodSpawner
+@onready var food_spawn_timer: Timer = $FoodSpawnTimer
 
 
 func _ready() -> void:
 	_event_bus.snake_spawned.connect(_on_snake_spawned)
 	_event_bus.emit_game_speed_changed(_speed)
+	food_spawn_timer.timeout.connect(_on_food_spawn_timer_timeout)
+	food_consumed.connect(_on_food_consumed)
 	for node in snake_spawn_locations.get_children():
 		_snake_free_spawn_locations.push_back(node)
 
@@ -28,7 +33,7 @@ func _process(delta: float) -> void:
 	_timer -= delta
 	if _timer > 0:
 		return
-	
+
 	_timer = 1 / _speed
 	for snake in _snakes:
 		_move(snake)
@@ -62,6 +67,8 @@ func _check_object_collissions(snake: Snake) -> void:
 	var map_object := _map.get_object(head)
 	if map_object:
 		map_object.collided(head, snake, _map)
+		if map_object is Food:
+			food_consumed.emit()
 
 
 func _check_snake_collissions(snake: Snake) -> void:
@@ -77,3 +84,11 @@ func _on_snake_damaged(snake: Snake) -> void:
 
 func _on_snake_size_changed(size_change: int, snake: Snake) -> void:
 	_event_bus.emit_snake_changed(snake, size_change)
+
+
+func _on_food_consumed() -> void:
+	food_spawner.spawn()
+	food_spawn_timer.start(food_spawn_timer.wait_time)
+
+func _on_food_spawn_timer_timeout() -> void:
+	food_spawner.spawn()

@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://me7klkfacpns"]
+[gd_scene load_steps=3 format=3 uid="uid://me7klkfacpns"]
 
+[ext_resource type="Theme" uid="uid://dqjc75de0xc2f" path="res://ui/snake.tres" id="1_0dkrt"]
 [ext_resource type="Script" uid="uid://77myd02xbs8w" path="res://ui/main_menu.gd" id="1_t7e0r"]
 
 [node name="MainMenu" type="Control"]
@@ -9,35 +10,62 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_0dkrt")
 script = ExtResource("1_t7e0r")
 
-[node name="StartButton" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HostButton" type="Button" parent="."]
+[node name="PrimaryMenu" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer/PrimaryMenu"]
 unique_name_in_owner = true
+layout_mode = 2
+text = "Play"
+
+[node name="Setting" type="Button" parent="CenterContainer/PrimaryMenu"]
+layout_mode = 2
+disabled = true
+text = "Settings"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/PrimaryMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit"
+
+[node name="MultiplayerMenuVBox" type="VBoxContainer" parent="CenterContainer"]
 visible = false
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 2
 
-[node name="JoinButton" type="Button" parent="."]
+[node name="HostButton" type="Button" parent="CenterContainer/MultiplayerMenuVBox"]
 unique_name_in_owner = true
+layout_mode = 2
+
+[node name="JoinButton" type="Button" parent="CenterContainer/MultiplayerMenuVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HostMenuVBox" type="VBoxContainer" parent="CenterContainer"]
 visible = false
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 2
 
-[node name="Setting" type="Button" parent="."]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="StartGame" type="Button" parent="CenterContainer/HostMenuVBox"]
+layout_mode = 2
 
-[node name="ExitButton" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="LeaveLobby" type="Button" parent="CenterContainer/HostMenuVBox"]
+layout_mode = 2
+text = "Leave Lobby"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+
+[node name="LeaveLobby" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Leave Lobby"
