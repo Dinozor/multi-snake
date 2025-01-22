@@ -78,6 +78,9 @@ func die() -> void:
 	died.emit()
 
 
+func is_moving() -> bool:
+	return _next_direction != Vector2i.ZERO
+
 func _update_new_direction() -> void:
 	if _next_direction.x == 0:
 		_direction.x = _next_direction.x

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://me7klkfacpns"]
 
-[ext_resource type="Theme" uid="uid://dqjc75de0xc2f" path="res://ui/snake.tres" id="1_0dkrt"]
+[ext_resource type="Theme" uid="uid://dqjc75de0xc2f" path="res://ui/main.tres" id="1_0dkrt"]
 [ext_resource type="Script" uid="uid://77myd02xbs8w" path="res://ui/main_menu.gd" id="1_t7e0r"]
 
 [node name="MainMenu" type="Control"]
@@ -38,6 +38,10 @@ text = "Settings"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"
+
+[node name="LocalMenu" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
 
 [node name="MultiplayerMenuVBox" type="VBoxContainer" parent="CenterContainer"]
 visible = false

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://7xjtp68ubely"]
+
+[ext_resource type="Script" uid="uid://libvuv8j5vv2" path="res://core/objects/coin.gd" id="1_jceia"]
+[ext_resource type="Texture2D" uid="uid://cb0e3la23ytub" path="res://levels/basic_level/snake_tiles_8x8.png" id="1_ljxjh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jceia"]
+atlas = ExtResource("1_ljxjh")
+region = Rect2(24, 24, 8, 8)
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_jceia")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_jceia")

@@ -54,6 +54,7 @@ func _on_snake_spawned(snake: Snake) -> void:
 	_map.add_snake(snake)
 	snake.snake_moved.connect(_on_snake_moved.bind(snake))
 	snake.damaged.connect(_on_snake_damaged.bind(snake))
+	snake.died.connect(_on_snake_died.bind(snake))
 	snake.size_changed.connect(_on_snake_size_changed.bind(snake))
 	_snakes.push_back(snake)
 
@@ -72,6 +73,8 @@ func _check_object_collissions(snake: Snake) -> void:
 
 
 func _check_snake_collissions(snake: Snake) -> void:
+	if not snake.is_moving():
+		return
 	var head := snake.calculate_next_position()
 	if _map.is_snake(head):
 		snake.damage()
@@ -80,6 +83,12 @@ func _check_snake_collissions(snake: Snake) -> void:
 func _on_snake_damaged(snake: Snake) -> void:
 	_event_bus.emit_snake_damaged(snake)
 	snake.stop()
+	snake.die()
+
+
+func _on_snake_died(snake: Snake) -> void:
+	snake.stop()
+	_event_bus.emit_snake_died(snake)
 
 
 func _on_snake_size_changed(size_change: int, snake: Snake) -> void:

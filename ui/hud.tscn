@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdn1d2g20ncgm"]
 
-[ext_resource type="Theme" uid="uid://dqjc75de0xc2f" path="res://ui/snake.tres" id="1_276te"]
+[ext_resource type="Theme" uid="uid://dqjc75de0xc2f" path="res://ui/main.tres" id="1_276te"]
 [ext_resource type="Script" uid="uid://cvf1ivubh48nv" path="res://ui/hud.gd" id="1_rbyyf"]
 
 [node name="Hud" type="Control"]
@@ -41,3 +41,43 @@ text = "Game Speed:"
 unique_name_in_owner = true
 layout_mode = 2
 text = "1"
+
+[node name="GameOverPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel"]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="GameOverPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Game over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOverPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="GameOverPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="PlayAgainButton" type="Button" parent="GameOverPanel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play again"

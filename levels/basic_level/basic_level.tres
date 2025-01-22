@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://bsh0dufafcqud"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://bsh0dufafcqud"]
 
 [ext_resource type="Resource" uid="uid://bwj7qrd7i1dlt" path="res://resources/cherry.tres" id="1_achki"]
 [ext_resource type="Resource" uid="uid://c5dj463fb8ftb" path="res://resources/brick_wall.tres" id="1_jkgjo"]
 [ext_resource type="Resource" uid="uid://bpqtpbbtg23ei" path="res://resources/mirror_teleport.tres" id="2_6h2pf"]
 [ext_resource type="Texture2D" uid="uid://cb0e3la23ytub" path="res://levels/basic_level/snake_tiles_8x8.png" id="2_achki"]
+[ext_resource type="PackedScene" uid="uid://7xjtp68ubely" path="res://core/objects/coin.tscn" id="5_ohp32"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6h2pf"]
 texture = ExtResource("2_achki")
@@ -65,8 +66,12 @@ texture_region_size = Vector2i(8, 8)
 7:3/0 = 0
 7:3/0/custom_data_0 = ExtResource("2_6h2pf")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ufvac"]
+scenes/1/scene = ExtResource("5_ohp32")
+
 [resource]
 tile_size = Vector2i(8, 8)
 custom_data_layer_0/name = "objects"
 custom_data_layer_0/type = 24
 sources/0 = SubResource("TileSetAtlasSource_6h2pf")
+sources/1 = SubResource("TileSetScenesCollectionSource_ufvac")

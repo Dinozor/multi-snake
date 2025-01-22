@@ -10,7 +10,7 @@ enum ObjectType {
 }
 
 @export var map_size: Vector2i = Vector2i.ZERO
-@export var _map: TileMapLayer
+@export var _map: SceneTileMapLayer
 @export var _snake_layer: TileMapLayer
 @export var source_id: int = 0
 @export var food_index: Vector2i
@@ -21,7 +21,6 @@ var _map_size_center_r : Vector2i
 
 func _ready() -> void:
 	assert(_map)
-	#food_spawn_timer.timeout.connect(_on_food_spawn_timer_timeout)
 	_map_size_center_r = map_size / 2 
 
 
@@ -46,6 +45,25 @@ func get_object(pos: Vector2i) -> MapObject:
 	return null
 
 
+func _process(_delta: float) -> void:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		pass
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		delete_clicket_tile()
+
+
+func delete_clicket_tile():
+	var clicked_cell = _map.local_to_map(_map.get_local_mouse_position())
+	_map.set_cell(clicked_cell)
+
+
+func get_scene(pos: Vector2i) -> CoinObject:
+	var node := _map.get_cell_scene(pos)
+	if node is CoinObject:
+		return node
+	return null
+
+
 func add_object(obj: MapObject, pos: Vector2i) -> void:
 	_map.set_cell(pos, obj.tileset_index, obj.tile_coordinate)
 
@@ -65,38 +83,3 @@ func get_random_map_position() -> Vector2i:
 	var x := randi_range(-_map_size_center_r.x, _map_size_center_r.x)
 	var y := randi_range(-_map_size_center_r.y, _map_size_center_r.y)
 	return Vector2i(x, y)
-
-#func remove_food(pos: Vector2i) -> bool:
-	#if not is_food(pos):
-		#return false
-	#_map.set_cell(pos)
-	#return true
-
-
-#func add_food(pos: Vector2i) -> void:
-	#_map.set_cell(pos, source_id, food_index)
-
-
-#func is_wall(pos: Vector2i) -> bool:
-	#var data = _map.get_cell_tile_data(pos)
-	#if data:
-		#var map_object = data.get_custom_data(object_layer_name)
-		#return map_object is Wall
-	#return false
-
-
-#func is_food(pos: Vector2i) -> bool:
-	#var data = _map.get_cell_tile_data(pos)
-	#if data:
-		#var map_object = data.get_custom_data(object_layer_name)
-		#return map_object is Food
-	#return false
-
-
-#func spawn_random_food() -> void:
-	#var x := randi_range(-_map_size_center_r.x, _map_size_center_r.x)
-	#var y := randi_range(-_map_size_center_r.y, _map_size_center_r.y)
-	#add_food(Vector2i(x, y))
-
-#func _on_food_spawn_timer_timeout() -> void:
-	#spawn_random_food()
