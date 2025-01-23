@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventBus="*res://core/event_bus.gd"
+NetworkLobby="*res://core/lobby.gd"
 
 [display]
 

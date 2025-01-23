@@ -2,13 +2,6 @@ class_name Map
 extends Node2D
 
 
-enum ObjectType {
-	NONE,
-	WALL,
-	SIMPLE_FOOD,
-	TELEPORT_MIRROR
-}
-
 @export var map_size: Vector2i = Vector2i.ZERO
 @export var _map: SceneTileMapLayer
 @export var _snake_layer: TileMapLayer

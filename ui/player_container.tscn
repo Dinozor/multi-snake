@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://calr6s05fsd3t"]
+
+[ext_resource type="Texture2D" uid="uid://cb0e3la23ytub" path="res://levels/basic_level/snake_tiles_8x8.png" id="1_0i376"]
+[ext_resource type="Script" uid="uid://bx5qv4xsi3f01" path="res://ui/player_container.gd" id="1_at2dy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgmly"]
+atlas = ExtResource("1_0i376")
+region = Rect2(0, 24, 8, 8)
+
+[node name="PlayerContainer" type="HBoxContainer"]
+script = ExtResource("1_at2dy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hgmly")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="NameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Name"
+
+[node name="DeviceNameLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Device"
+
+[node name="KickPlayerButton" type="Button" parent="."]
+layout_mode = 2
+text = "Kick"

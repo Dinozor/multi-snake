@@ -22,12 +22,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PrimaryMenu" type="VBoxContainer" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="StartButton" type="Button" parent="CenterContainer/PrimaryMenu"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Play"
+
+[node name="LocalButton" type="Button" parent="CenterContainer/PrimaryMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Local"
+
+[node name="MultiplayerButton" type="Button" parent="CenterContainer/PrimaryMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Multiplayer"
 
 [node name="Setting" type="Button" parent="CenterContainer/PrimaryMenu"]
 layout_mode = 2
@@ -40,20 +46,65 @@ layout_mode = 2
 text = "Exit"
 
 [node name="LocalMenu" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="MultiplayerMenuVBox" type="VBoxContainer" parent="CenterContainer"]
+[node name="SingleButton" type="Button" parent="CenterContainer/LocalMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Single"
+
+[node name="VersusButton" type="Button" parent="CenterContainer/LocalMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Versus"
+
+[node name="BackFromLocalButton" type="Button" parent="CenterContainer/LocalMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+
+[node name="MultiplayerMenu" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="HostButton" type="Button" parent="CenterContainer/MultiplayerMenuVBox"]
+[node name="PlayerNameEdit" type="LineEdit" parent="CenterContainer/MultiplayerMenu"]
 unique_name_in_owner = true
+layout_mode = 2
+text = "Player 1"
+placeholder_text = "Player name"
+
+[node name="YourIP" type="LineEdit" parent="CenterContainer/MultiplayerMenu"]
+layout_mode = 2
+text = "127.0.0.1"
+secret = true
+
+[node name="HostButton" type="Button" parent="CenterContainer/MultiplayerMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Host"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MultiplayerMenu"]
 layout_mode = 2
 
-[node name="JoinButton" type="Button" parent="CenterContainer/MultiplayerMenuVBox"]
+[node name="TargetIPEdit" type="LineEdit" parent="CenterContainer/MultiplayerMenu/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "127.0.0.1"
+secret = true
+
+[node name="JoinButton" type="Button" parent="CenterContainer/MultiplayerMenu/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Join"
+
+[node name="BackFromMultiplayerButton" type="Button" parent="CenterContainer/MultiplayerMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
 
 [node name="HostMenuVBox" type="VBoxContainer" parent="CenterContainer"]
 visible = false
