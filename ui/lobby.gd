@@ -1,6 +1,7 @@
 extends Control
 
 const MAIN_MENU_PATH = "res://ui/main_menu.tscn"
+const BASIC_LEVEL = preload("res://levels/basic_level/basic_level.tscn")
 const PLAYER_CONTAINER = preload("res://ui/player_container.tscn")
 
 var _network_lobby: NetworkLobby = NetworkLobby
@@ -12,6 +13,8 @@ var _network_lobby: NetworkLobby = NetworkLobby
 
 func _ready() -> void:
 	leave_button.pressed.connect(_on_leave_lobby_pressed)
+	
+	start_game_button.pressed.connect(_on_start_button_pressed)
 	
 	_network_lobby.player_connected.connect(_on_player_connected)
 	_network_lobby.player_disconnected.connect(_on_player_disconnected)
@@ -38,6 +41,10 @@ func _on_player_connected(_peer_id, player_info) -> void:
 
 func _on_player_disconnected(peer_id: int) -> void:
 	_refresh_lobby()
+
+
+func _on_start_button_pressed() -> void:
+	get_tree().change_scene_to_packed(BASIC_LEVEL)
 
 
 func _on_leave_lobby_pressed() -> void:
