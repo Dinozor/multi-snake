@@ -9,7 +9,7 @@ signal server_disconnected
 
 const PORT = 7000
 const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
-const MAX_CONNECTIONS = 20
+const MAX_CONNECTIONS = 12
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
@@ -57,6 +57,11 @@ func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
 
 
+func remove_player(player: PlayerInfo) -> void:
+	var peer = players.find_key(player)
+	multiplayer.multiplayer_peer.disconnect_peer(peer)
+
+
 # When the server decides to start the game from a UI scene,
 # do Lobby.load_game.rpc(filepath)
 @rpc("call_local", "reliable")
@@ -84,9 +89,9 @@ func _on_player_connected(id):
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info_dictionary):
 	var new_player_id = multiplayer.get_remote_sender_id()
-	var player_info = PlayerInfo.create_from_dictionary(new_player_info_dictionary)
-	players[new_player_id] = player_info
-	player_connected.emit(new_player_id, player_info)
+	var new_player_info = PlayerInfo.create_from_dictionary(new_player_info_dictionary)
+	players[new_player_id] = new_player_info
+	player_connected.emit(new_player_id, new_player_info)
 
 
 func _on_player_disconnected(id):

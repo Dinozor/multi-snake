@@ -3,6 +3,7 @@ extends RefCounted
 
 
 @export var name: String
+@export var is_local: bool = false
 
 
 func _init(player_name: String = "") -> void:

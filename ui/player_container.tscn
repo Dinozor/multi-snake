@@ -16,15 +16,24 @@ texture = SubResource("AtlasTexture_hgmly")
 expand_mode = 2
 stretch_mode = 1
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="LineEdit" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Name"
+placeholder_text = "Player name"
+editable = false
 
 [node name="DeviceNameLabel" type="Label" parent="."]
 layout_mode = 2
-text = "Device"
+text = "Device:"
 
-[node name="KickPlayerButton" type="Button" parent="."]
+[node name="RemovePlayerButton" type="Button" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Kick"
+text = "Remove"
+
+[node name="DeviceOptionButton" type="OptionButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+fit_to_longest_item = false
