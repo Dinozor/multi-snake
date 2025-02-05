@@ -20,6 +20,7 @@ var _snake_free_spawn_locations: Array[Node2D]
 #@onready var food_spawner: ObjectSpawner = $FoodSpawner
 #@onready var food_spawn_timer: Timer = $FoodSpawnTimer
 
+
 func start() -> void:
 	level_started.emit()
 

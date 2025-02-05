@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkbhvusbasy15"]
+
+[ext_resource type="Script" uid="uid://beekwh3kk7bw3" path="res://core/global_config.gd" id="1_qb1r5"]
+[ext_resource type="PackedScene" uid="uid://me7klkfacpns" path="res://ui/main_menu/main_menu.tscn" id="2_6d446"]
+
+[node name="GlobalConfig" type="Node"]
+script = ExtResource("1_qb1r5")
+_main_menu = ExtResource("2_6d446")

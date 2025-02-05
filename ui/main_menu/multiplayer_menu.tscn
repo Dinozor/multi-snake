@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj7t3txa3ylbn"]
+
+[ext_resource type="Script" uid="uid://cavxse721ng6y" path="res://ui/main_menu/multiplayer_menu.gd" id="1_fb778"]
+
+[node name="MultiplayerMenu" type="VBoxContainer"]
+script = ExtResource("1_fb778")
+
+[node name="PlayerNameEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Player 1"
+placeholder_text = "Player name"
+
+[node name="YourIP" type="LineEdit" parent="."]
+layout_mode = 2
+text = "127.0.0.1"
+secret = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+text = "Max Players"
+
+[node name="MaxPlayers" type="SpinBox" parent="HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 2.0
+max_value = 12.0
+value = 2.0
+rounded = true
+
+[node name="HostButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Host"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TargetIPEdit" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "127.0.0.1"
+secret = true
+
+[node name="JoinButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Join"

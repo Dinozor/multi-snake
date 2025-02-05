@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://btx75apydijlp"]
+[gd_scene load_steps=11 format=4 uid="uid://btx75apydijlp"]
 
 [ext_resource type="Script" uid="uid://ui1kaj2yuo7x" path="res://levels/basic_level/basic_level.gd" id="1_7ko8y"]
 [ext_resource type="Script" uid="uid://ttf8w6ld41nf" path="res://core/map.gd" id="2_jxqax"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cdn1d2g20ncgm" path="res://ui/hud.tscn" id="6_ylr87"]
 [ext_resource type="Script" uid="uid://bwn38kiep5yaq" path="res://levels/basic_level/object_spawner.gd" id="7_qoumo"]
 [ext_resource type="Resource" uid="uid://bwj7qrd7i1dlt" path="res://resources/cherry.tres" id="8_607os"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3mfs5"]
 
 [node name="BasicLevel" type="Node2D" node_paths=PackedStringArray("snake_controller", "_map")]
 script = ExtResource("1_7ko8y")
@@ -28,6 +30,10 @@ position = Vector2(44, 28)
 script = ExtResource("3_h6lqb")
 snake_head_tile = Vector2i(0, 3)
 snake_body_tile = Vector2i(1, 3)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Snake"]
+root_path = NodePath("../../Map/SnakeLayer")
+replication_config = SubResource("SceneReplicationConfig_3mfs5")
 
 [node name="Snake2" type="Node" parent="."]
 script = ExtResource("3_h6lqb")

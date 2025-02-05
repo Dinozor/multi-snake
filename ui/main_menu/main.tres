@@ -2,5 +2,6 @@
 
 [resource]
 Button/font_sizes/font_size = 32
+ItemList/colors/font_hovered_color = Color(0.24507, 0.690275, 0.288906, 1)
 Label/font_sizes/font_size = 28
 Label/fonts/font = null

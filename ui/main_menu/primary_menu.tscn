@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://dprx5y31v3hx3"]
+
+[ext_resource type="Script" uid="uid://bhcb4m5860bpg" path="res://ui/main_menu/primary_menu.gd" id="1_1m52y"]
+
+[node name="PrimaryMenu" type="VBoxContainer"]
+script = ExtResource("1_1m52y")
+
+[node name="LocalButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Local"
+
+[node name="MultiplayerButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Multiplayer"
+
+[node name="Setting" type="Button" parent="."]
+visible = false
+layout_mode = 2
+disabled = true
+text = "Settings"
+
+[node name="ExitButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit"

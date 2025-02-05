@@ -1,11 +1,13 @@
 extends Node
-
 # Autoload named Lobby
+
 
 # These signals can be connected to by a UI lobby scene or the game scene.
 signal player_connected(peer_id: int, player_info: PlayerInfo)
 signal player_disconnected(peer_id: int)
 signal server_disconnected
+signal game_created()
+signal joined_server()
 
 const PORT = 7000
 const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
@@ -19,7 +21,7 @@ var players: Dictionary[int, PlayerInfo]
 # before the connection is made. It will be passed to every other peer.
 # For example, the value of "name" can be set to something the player
 # entered in a UI scene.
-var player_info: PlayerInfo = PlayerInfo.new("Player 1")
+var player_info: PlayerInfo = PlayerInfo.new("Player 1", -1)
 
 var players_loaded = 0
 
@@ -32,6 +34,14 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 
+func is_active() -> bool:
+	return multiplayer.multiplayer_peer != null
+
+
+func is_server() -> bool:
+	return multiplayer.is_server()
+
+
 func join_game(address = ""):
 	if address.is_empty():
 		address = DEFAULT_SERVER_IP
@@ -40,16 +50,18 @@ func join_game(address = ""):
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
+	joined_server.emit()
 
 
-func create_game():
+func create_game(max_players: int = 1):
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(PORT, MAX_CONNECTIONS)
+	var m = max_players if max_players < MAX_CONNECTIONS else MAX_CONNECTIONS
+	var error = peer.create_server(PORT, m - 1)
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-
-	players[1] = player_info
+	players[1] = PlayerInfo.new(player_info.name, 1)
+	game_created.emit()
 	player_connected.emit(1, player_info)
 
 
@@ -60,6 +72,11 @@ func remove_multiplayer_peer():
 func remove_player(player: PlayerInfo) -> void:
 	var peer = players.find_key(player)
 	multiplayer.multiplayer_peer.disconnect_peer(peer)
+
+
+func disconnect_player(player_id: int) -> void:
+	if multiplayer.get_peers().has(player_id):
+		multiplayer.multiplayer_peer.disconnect_peer(player_id)
 
 
 # When the server decides to start the game from a UI scene,
@@ -83,13 +100,15 @@ func player_loaded():
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
 func _on_player_connected(id):
+	prints(multiplayer.get_unique_id(), "_on_player_connected", id)
 	_register_player.rpc_id(id, player_info.serialize())
 
 
 @rpc("any_peer", "reliable")
-func _register_player(new_player_info_dictionary):
+func _register_player(new_player_info_data: Dictionary):
+	prints(multiplayer.get_unique_id(), "_register_player", new_player_info_data)
 	var new_player_id = multiplayer.get_remote_sender_id()
-	var new_player_info = PlayerInfo.create_from_dictionary(new_player_info_dictionary)
+	var new_player_info = PlayerInfo.new(new_player_info_data.get("name", ""), new_player_id)
 	players[new_player_id] = new_player_info
 	player_connected.emit(new_player_id, new_player_info)
 
@@ -100,7 +119,9 @@ func _on_player_disconnected(id):
 
 
 func _on_connected_ok():
+	prints(multiplayer.get_unique_id(), "Connected to a server")
 	var peer_id = multiplayer.get_unique_id()
+	player_info = PlayerInfo.new(player_info.name, peer_id)
 	players[peer_id] = player_info
 	player_connected.emit(peer_id, player_info)
 

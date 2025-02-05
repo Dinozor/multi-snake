@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://calr6s05fsd3t"]
+
+[ext_resource type="Texture2D" uid="uid://cb0e3la23ytub" path="res://levels/basic_level/snake_tiles_8x8.png" id="1_0i376"]
+[ext_resource type="Script" uid="uid://bx5qv4xsi3f01" path="res://ui/network_lobby/player_container.gd" id="1_at2dy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgmly"]
+atlas = ExtResource("1_0i376")
+region = Rect2(0, 24, 8, 8)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_at2dy"]
+properties/0/path = NodePath("NameLabel:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("ReadyCheckBox:button_pressed")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="PlayerContainer" type="HBoxContainer"]
+script = ExtResource("1_at2dy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hgmly")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="NameLabel" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Player name"
+editable = false
+
+[node name="Device" type="BoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="DeviceNameLabel" type="Label" parent="Device"]
+layout_mode = 2
+text = "Device:"
+
+[node name="DeviceOptionButton" type="OptionButton" parent="Device"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+fit_to_longest_item = false
+
+[node name="RemovePlayerButton" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Remove"
+
+[node name="ReadyCheckBox" type="CheckBox" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_at2dy")
+
+[node name="DebugContainer" type="BoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="PlayerID" type="Label" parent="DebugContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AuthorityID" type="Label" parent="DebugContainer"]
+unique_name_in_owner = true
+layout_mode = 2
