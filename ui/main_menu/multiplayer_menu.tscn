@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj7t3txa3ylbn"]
+[gd_scene load_steps=4 format=3 uid="uid://dj7t3txa3ylbn"]
 
 [ext_resource type="Script" uid="uid://cavxse721ng6y" path="res://ui/main_menu/multiplayer_menu.gd" id="1_fb778"]
+[ext_resource type="Texture2D" uid="uid://jfacyexoqfcw" path="res://ui/GuiVisibilityHidden.svg" id="2_nl8yw"]
+[ext_resource type="Texture2D" uid="uid://ca0m4ix5bapu5" path="res://ui/GuiVisibilityVisible.svg" id="3_qdi35"]
 
 [node name="MultiplayerMenu" type="VBoxContainer"]
 anchors_preset = 8
@@ -104,13 +106,17 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "127.0.0.1"
+select_all_on_focus = true
 secret = true
 
-[node name="ShowTargetIPButton" type="Button" parent="HostJoinContainer/JoinServerContainer/TargetIPContainer/IPEditButtonContainer"]
+[node name="ShowTargetIPButton" type="TextureButton" parent="HostJoinContainer/JoinServerContainer/TargetIPContainer/IPEditButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+toggle_mode = true
 action_mode = 0
-text = "Show"
+texture_normal = ExtResource("2_nl8yw")
+texture_pressed = ExtResource("3_qdi35")
+stretch_mode = 3
 
 [node name="JoinButton" type="Button" parent="HostJoinContainer/JoinServerContainer"]
 unique_name_in_owner = true

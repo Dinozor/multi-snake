@@ -13,7 +13,7 @@ var _join_label_text: String = "Join"
 @onready var _target_ip_edit: LineEdit = %TargetIPEdit
 @onready var _max_players: SpinBox = %MaxPlayers
 @onready var _port_box: SpinBox = %PortBox
-@onready var _show_target_ip_button: Button = %ShowTargetIPButton
+@onready var _show_target_ip_button: BaseButton = %ShowTargetIPButton
 
 
 func _ready() -> void:
@@ -21,8 +21,7 @@ func _ready() -> void:
 	_host_button.pressed.connect(_on_host_button_pressed)
 	_join_button.pressed.connect(_on_join_button_pressed)
 
-	_show_target_ip_button.button_down.connect(_on_show_target_ip_button_pressed)
-	_show_target_ip_button.button_up.connect(_on_show_target_ip_button_released)
+	_show_target_ip_button.toggled.connect(_on_show_target_ip_button_toggled)
 
 	_network_lobby.remove_multiplayer_peer()
 	_network_lobby.game_created.connect(_on_game_created)
@@ -67,9 +66,5 @@ func _on_join_button_pressed() -> void:
 		_join_button.text = "Joining ..."
 
 
-func _on_show_target_ip_button_pressed() -> void:
-	_target_ip_edit.secret = false
-
-
-func _on_show_target_ip_button_released() -> void:
-	_target_ip_edit.secret = true
+func _on_show_target_ip_button_toggled(toggled_on: bool) -> void:
+	_target_ip_edit.secret = not toggled_on
