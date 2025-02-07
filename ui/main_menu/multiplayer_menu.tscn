@@ -3,27 +3,73 @@
 [ext_resource type="Script" uid="uid://cavxse721ng6y" path="res://ui/main_menu/multiplayer_menu.gd" id="1_fb778"]
 
 [node name="MultiplayerMenu" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -68.0
+offset_right = 176.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
 script = ExtResource("1_fb778")
 
-[node name="PlayerNameEdit" type="LineEdit" parent="."]
-unique_name_in_owner = true
+[node name="PlayerPortContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-text = "Player 1"
+
+[node name="PlayerNameContainer" type="HBoxContainer" parent="PlayerPortContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerNameLabel" type="Label" parent="PlayerPortContainer/PlayerNameContainer"]
+layout_mode = 2
+text = "Player Name"
+
+[node name="PlayerNameEdit" type="LineEdit" parent="PlayerPortContainer/PlayerNameContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "Player name"
 
-[node name="YourIP" type="LineEdit" parent="."]
-layout_mode = 2
-text = "127.0.0.1"
-secret = true
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="ServerPortContainer" type="HBoxContainer" parent="PlayerPortContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer2"]
+[node name="ServerPortLabel" type="Label" parent="PlayerPortContainer/ServerPortContainer"]
+layout_mode = 2
+text = "Server Port"
+
+[node name="PortBox" type="SpinBox" parent="PlayerPortContainer/ServerPortContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1000.0
+max_value = 100000.0
+value = 7000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="HostJoinContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HostServerContainer" type="VBoxContainer" parent="HostJoinContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MaxPlayerCountContainer" type="HBoxContainer" parent="HostJoinContainer/HostServerContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HostJoinContainer/HostServerContainer/MaxPlayerCountContainer"]
 layout_mode = 2
 text = "Max Players"
 
-[node name="MaxPlayers" type="SpinBox" parent="HBoxContainer2"]
+[node name="MaxPlayers" type="SpinBox" parent="HostJoinContainer/HostServerContainer/MaxPlayerCountContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 2.0
@@ -31,21 +77,42 @@ max_value = 12.0
 value = 2.0
 rounded = true
 
-[node name="HostButton" type="Button" parent="."]
+[node name="HostButton" type="Button" parent="HostJoinContainer/HostServerContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Host"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VSeparator" type="VSeparator" parent="HostJoinContainer"]
 layout_mode = 2
 
-[node name="TargetIPEdit" type="LineEdit" parent="HBoxContainer"]
+[node name="JoinServerContainer" type="VBoxContainer" parent="HostJoinContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TargetIPContainer" type="VBoxContainer" parent="HostJoinContainer/JoinServerContainer"]
+layout_mode = 2
+
+[node name="TargetIPLabel" type="Label" parent="HostJoinContainer/JoinServerContainer/TargetIPContainer"]
+layout_mode = 2
+text = "Target IP"
+
+[node name="IPEditButtonContainer" type="HBoxContainer" parent="HostJoinContainer/JoinServerContainer/TargetIPContainer"]
+layout_mode = 2
+
+[node name="TargetIPEdit" type="LineEdit" parent="HostJoinContainer/JoinServerContainer/TargetIPContainer/IPEditButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "127.0.0.1"
 secret = true
 
-[node name="JoinButton" type="Button" parent="HBoxContainer"]
+[node name="ShowTargetIPButton" type="Button" parent="HostJoinContainer/JoinServerContainer/TargetIPContainer/IPEditButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+action_mode = 0
+text = "Show"
+
+[node name="JoinButton" type="Button" parent="HostJoinContainer/JoinServerContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Join"

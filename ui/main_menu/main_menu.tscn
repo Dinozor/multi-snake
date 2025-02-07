@@ -41,28 +41,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="MenuContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="PrimaryMenu" parent="CenterContainer/VBoxContainer" node_paths=PackedStringArray("_local_menu", "_multiplayer_menu") instance=ExtResource("3_joh67")]
+[node name="PrimaryMenu" parent="CenterContainer/MenuContainer" node_paths=PackedStringArray("_local_menu", "_multiplayer_menu") instance=ExtResource("3_joh67")]
 unique_name_in_owner = true
 layout_mode = 2
 _local_menu = NodePath("../LocalMenu")
 _multiplayer_menu = NodePath("../MultiplayerMenu")
 
-[node name="LocalMenu" parent="CenterContainer/VBoxContainer" instance=ExtResource("3_3c04x")]
+[node name="LocalMenu" parent="CenterContainer/MenuContainer" instance=ExtResource("3_3c04x")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 _lobby_scene = ExtResource("5_u184e")
 
-[node name="MultiplayerMenu" parent="CenterContainer/VBoxContainer" instance=ExtResource("4_joh67")]
+[node name="MultiplayerMenu" parent="CenterContainer/MenuContainer" instance=ExtResource("4_joh67")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 _lobby_path = ExtResource("6_joh67")
 
-[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="CenterContainer/MenuContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2

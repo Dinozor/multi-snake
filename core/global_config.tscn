@@ -1,8 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkbhvusbasy15"]
+[gd_scene load_steps=4 format=3 uid="uid://dkbhvusbasy15"]
 
 [ext_resource type="Script" uid="uid://beekwh3kk7bw3" path="res://core/global_config.gd" id="1_qb1r5"]
 [ext_resource type="PackedScene" uid="uid://me7klkfacpns" path="res://ui/main_menu/main_menu.tscn" id="2_6d446"]
+[ext_resource type="Script" uid="uid://dut20beqoi87c" path="res://ui/error_panel.gd" id="3_kuc7a"]
 
 [node name="GlobalConfig" type="Node"]
 script = ExtResource("1_qb1r5")
 _main_menu = ExtResource("2_6d446")
+
+[node name="ErrorPanel" type="PopupPanel" parent="."]
+auto_translate_mode = 1
+title = "Error"
+initial_position = 2
+size = Vector2i(529, 104)
+script = ExtResource("3_kuc7a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ErrorPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 525.0
+offset_bottom = 100.0
+
+[node name="ErrorLabel" type="Label" parent="ErrorPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "An error occured! Back to Main Menu!"
+
+[node name="Button" type="Button" parent="ErrorPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OK"

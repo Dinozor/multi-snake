@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalConfig="*res://core/global_config.gd"
 EventBus="*res://core/event_bus.gd"
+GlobalConfig="*res://core/global_config.tscn"
 NetworkLobby="*res://core/lobby.gd"
 DeviceManager="*res://core/device_manager.gd"
 
@@ -36,6 +36,10 @@ folder_colors={
 "res://core/": "red",
 "res://ui/": "teal"
 }
+
+[gui]
+
+theme/custom="uid://dqjc75de0xc2f"
 
 [input]
 

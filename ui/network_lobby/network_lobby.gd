@@ -3,6 +3,8 @@ extends Control
 
 const PlayerContainer = preload("res://ui/network_lobby/player_container.gd")
 
+const SERVER_DISCONNECT_MESSAGE = "Server disconnected!"
+
 @export var  _levels: Array[PackedScene]
 @export var _player_container: PackedScene
 
@@ -14,9 +16,6 @@ var _device_manager: DeviceManager = DeviceManager
 @onready var start_game_button: Button = %StartGameButton
 @onready var add_player_button: Button = %AddPlayerButton
 @onready var connected_players_container: VBoxContainer = %ConnectedPlayersContainer
-@onready var error_label: Label = %ErrorLabel
-@onready var button: Button = %Button
-@onready var error_panel: PopupPanel = %ErrorPanel
 
 
 func _ready() -> void:
@@ -86,11 +85,7 @@ func _on_player_disconnected(peer_id: int) -> void:
 
 
 func _on_server_disconnnected() -> void:
-	error_label.text = "Server connection error! (Server disconnected or you got kicked)"
-	error_panel.show()
-	await error_panel.popup_hide
-	error_panel.hide()
-	_global_config.change_scene_to_main_menu()
+	_global_config.crash(SERVER_DISCONNECT_MESSAGE)
 
 
 func _on_add_player_button() -> void:
@@ -112,4 +107,5 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_leave_lobby_pressed() -> void:
+	_network_lobby.remove_multiplayer_peer()
 	_global_config.change_scene_to_main_menu()
